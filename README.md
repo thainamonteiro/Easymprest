@@ -1,2 +1,2 @@
-# EASYMPREST :dólar:  
+# EASYMPREST    :moneybag:
 ---
