@@ -1,4 +1,9 @@
 # EASYMPREST    :moneybag:
-> Desafio Stone - Mega Hack
+> Seja você o banco e lucre também! 
 
-### O que é o EASYMPREST?
+### Quer saber mais sobre o EASYMPREST? 
+  ####  Leia nosso plano de negócios. ☺ 
+
+
+
+    
