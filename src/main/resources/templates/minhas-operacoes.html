@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+<title>Minhas Operações</title>
+
+<div th:replace="fragments/header :: header-css"></div>
+
+<style type="text/css">
+
+	.val-operacoes{
+	    display: inline-grid;
+	    border-color: black;
+	    box-shadow: 1px 1px 3px 0px;
+	    padding: 10px;
+	    margin-bottom: 10px;
+	    transiton : all 100s;
+	    opacity: 0.9
+	}
+	
+	.val-operacoes:hover{
+	   opacity: 1;
+	}
+	
+	.val-credit{
+		background: #d3fff1;
+	}
+	
+	.val-debit{
+		background: antiquewhite;
+	}
+	
+	.selecionado-credito:hover{
+		background: rgb(163, 247, 216) !important;
+	}
+	
+	.selecionado-debito:hover{
+		background: #f9d8ad !important;
+	}
+
+</style>
+
+</head>
+<body>
+
+	<div th:replace="fragments/loading :: loading"></div>
+
+	<div class="wrapper">
+
+		<div th:replace="fragments/menu :: menu"></div>
+
+		<div class="main-panel">
+
+			<div th:replace="fragments/sitenavbar :: sitenavbar"></div>
+
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Minhas Operações</h4>
+								</div>
+
+								<div class="content">
+									
+									<div class="val-operacoes val-credit"><strong >Valor Investido</strong><span th:text="${'R$ ' + valorCredito}"></span></div> 
+									<div class="val-operacoes val-debit"><strong >Empréstimos</strong><span th:text="${'R$ ' + valorDebito}"></span></div>
+
+									<table class="table table-striped table-bordered"
+										style="width: 100%">
+
+										<thead>
+											<tr>
+												<th>Investidor</th>
+												<th>Valor</th>
+												<th>Rendimentos</th>
+												<th>Descrição</th>
+												<th>Tipo</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="operacao : ${operacoes}" class="selecionado">
+												<td><span th:text="${operacao.userOperacao.email}"></span>
+												</td>
+
+												<td th:text="${operacao.investimento != null} ? ${operacao.investimento.valorInvestido} : ${operacao.emprestimo.valorTotalSolicitado}"></td>
+												
+												<td th:text="${operacao.investimento != null} ? ${operacao.investimento.valorInvestido} : '-'"></td>
+												
+												<td th:text="${operacao.investimento != null} ? ${operacao.investimento.motivo} : ${operacao.emprestimo.motivo}"></td>
+
+												<td><span th:text="${operacao.operacaoType}"></span></td>
+												<td><span th:text="${operacao.status}"></span>
+													<button th:if="${operacao.status.name() == 'AGUARDANDOAPROVACAO' && operacao.operacaoType.name() == 'INVESTIMENTO' }" class="btn btn-primary" id="btn-aprovar" th:attr="easy-id-investimento=${operacao.id}">Aprovar</button>
+												</td>
+<!-- 												&& operacao.operacaoType.name() == 'INVESTIMENTO' -->
+												
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div th:replace="fragments/footer :: footer"></div>
+
+		</div>
+	</div>
+
+
+</body>
+
+<div th:replace="fragments/scriptsfimpage :: scriptsfimpage"></div>
+
+<script type="text/javascript">
+
+Array.from($('td').children('span')).filter(e => e.innerText === 'INVESTIMENTO').forEach(e => $(e).parents('tr:first').css('background','#d3fff1').attr('class','selecionado-credito'))
+Array.from($('td').children('span')).filter(e => e.innerText === 'EMPRESTIMO').forEach(e => $(e).parents('tr:first').css('background','antiquewhite').attr('class', 'selecionado-debito'))
+
+
+</script>
+
+</html>

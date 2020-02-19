@@ -1,0 +1,27 @@
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  datasource:
+    testOnBorrow: true
+    validationQuery: SELECT 1
+    url: jdbc:mysql://localhost:3306/easymprest?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  queries:
+    users-query: select email, password, active from user where email=?
+    roles-query: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+server:
+     port: 80
+     
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /swagger2.json

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- HTML 4 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- HTML5 -->
+<meta charset="utf-8"/>
+
+<head>
+
+<title>Easymprest</title>
+
+<div th:replace="fragments/header :: header-css"></div>
+
+</head>
+<body>
+
+	<div class="wrapper">
+
+		<div th:replace="fragments/menu :: menu"></div>
+
+		<div class="main-panel">
+
+			<div th:replace="fragments/sitenavbar :: sitenavbar"></div>
+
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+
+						<div class="col-md-12">
+
+								<div class="content">
+
+	                                 <div class="typo-line">
+	                                    <h6><p class="category"><span th:utext="${userName}"></span></h6>
+	                                </div>
+
+								</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div th:replace="fragments/footer :: footer"></div>
+
+		</div>
+	</div>
+
+
+</body>
+
+<div th:replace="fragments/scriptsfimpage :: scriptsfimpage"></div>
+
+</html>

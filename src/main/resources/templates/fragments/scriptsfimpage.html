@@ -1,0 +1,139 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="scriptsfimpage">
+
+<!--   Core JS Files22   -->
+<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+
+<!--  Google Maps Plugin    -->
+<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="assets/js/light-bootstrap-dashboard.js"></script>
+
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+
+	if(location.href.includes('investimentos')){
+		document.formularioInvestimentos.onsubmit = function(evento){
+			$(this).showLoading();
+			let inValor = document.querySelector('[id=valorInvestimento]')
+			inValor.value = inValor.value.replace('R$','')
+		}
+	}
+
+	$('[data-mask]').on('keyup',function(){
+		if(parseFloat($(this).val()) > 200.00){
+			$(this).val('200.00')
+			$(this).toggleClass('valor-invalido')
+			const aviso = $('[valor-invalido]')
+			if(aviso.is(':hidden')){
+				aviso.fadeIn(800).text(aviso.attr('valor-invalido'))
+			}
+		}else{
+			const aviso = $('[valor-invalido]')
+			$(this).removeClass('valor-invalido')
+			if(!aviso.is(':hidden')){
+				aviso.fadeOut(500).text('')
+			}
+		}
+	} )
+	
+	$('[data-mask]').on('focusout',function(){
+		const aviso = $('[valor-invalido]')
+		$(this).removeClass('valor-invalido')
+		if(!aviso.is(':hidden')){
+			aviso.fadeOut(500).text('')
+		}
+	})
+	
+	$('[easy-id-emprestimo]').click(function(){
+		
+		swal({
+			  title: "Você tem certeza?",
+			  text: "Não solicite um empréstimo caso não tenha certeza de que terá como pagar!",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((aceitou) => {
+			  if (aceitou) {
+				  
+				  	const idUsuario = $(this).attr('easy-id-user');
+					const idEmprestimo = $(this).attr('easy-id-emprestimo');
+					
+					$.ajax({
+							method: "POST",
+						 	url: "emprestimos",
+							data: { idUsuario, idEmprestimo }
+							})	.done( (resposta, status) => {
+								swal("Apah, vá olhar sua conta, o dinheiro ja deve estar la !", {icon: "success",}) 
+								$(this).parents('tr:first').remove();
+							})
+								.fail( (error, status) => swal("Ah não", "Houve um erro ao solicitar este empréstimo !", {icon: "warning",}))
+			  } else {
+			    	swal("Okay, não se preocupe, com certeza foi o melhor a se fazer !");
+			  }
+			});
+		
+	});
+	
+	$('#btn-aprovar').click(function(){
+			
+			swal({
+				  title: "Voc\u00ea tem certeza?",
+				  text: "Caso queira proceguir com o investimento, clique em ok.",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				})
+				.then((aceitou) => {
+				  if (aceitou) {
+					  
+					  	$.ajax({
+								method: "POST",
+							 	url: "aprovarEmprestimo",
+								data: { idOperacao : $(this).attr('easy-id-investimento') }
+								})	.done( (resposta, status) => {
+									swal("Apah, voc\u00ea fez seu amigo muito feliz !", {icon: "success",}) 
+									$(this).parents('tr:first').remove();
+								})
+									.fail( (error, status) => swal("Ah n\u00e3o", "Houve um erro ao confirmar este empr\u00e9stimo !", {icon: "warning",}))
+				  } else {
+				    	swal("Okay, n\u00e3o se preocupe, com certeza foi o melhor a se fazer !");
+				  }
+				});
+			
+		});
+	
+	$.fn.showLoading = function(){
+		$('#loading').show();
+	}
+	
+	$.fn.hideLoading = function(){
+		$('#loading').hide();
+	}
+	
+</script>
+
+
+</div>
+
+</html>

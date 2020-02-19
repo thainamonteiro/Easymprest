@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+<title>Easymprest</title>
+
+<div th:replace="fragments/header :: header-css"></div>
+
+</head>
+<body>
+
+	<div class="wrapper">
+
+		<div th:replace="fragments/menu :: menu"></div>
+
+		<div class="main-panel">
+
+			<div th:replace="fragments/sitenavbar :: sitenavbar"></div>
+
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Registro de usuários</h4>
+								</div>
+
+								<div class="content">
+									<form autocomplete="off" action="#"
+										th:action="@{/registration}" th:object="${user}" method="post"
+										class="form-horizontal" role="form">
+										<div class="form-group">
+											<div class="col-sm-9">
+												<label th:if="${#fields.hasErrors('name')}"
+													th:errors="*{name}" class="validation-message"></label> <input
+													type="text" th:field="*{name}" placeholder="Name"
+													class="form-control" />
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-9">
+												<label th:if="${#fields.hasErrors('registration')}"
+													th:errors="*{registration}" class="validation-message"></label>
+												<input type="text" th:field="*{registration}"
+													placeholder="Matricula" class="form-control" />
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<div class="col-sm-9">
+												
+												<select	class="form-control select2" th:field="*{role}">
+													<option th:each="role : ${roles}"	th:value="${role.role}" th:text="${role.role}"></option>
+												</select>
+
+											</div>
+										</div>										
+										
+										<div class="form-group">
+											<div class="col-sm-9">
+												<input type="text" th:field="*{email}" placeholder="Email" class="form-control" /> 
+												<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<div class="col-sm-9">
+												<input type="password" th:field="*{password}"
+													placeholder="Senha" class="form-control" /> <label
+													th:if="${#fields.hasErrors('password')}"
+													th:errors="*{password}" class="validation-message"></label>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-9">
+												<button type="submit" class="btn btn-primary btn-block">Register
+													User</button>
+											</div>
+										</div>
+
+										<span th:utext="${successMessage}"></span>
+
+
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div th:replace="fragments/footer :: footer"></div>
+
+		</div>
+	</div>
+
+
+</body>
+
+<div th:replace="fragments/scriptsfimpage :: scriptsfimpage"></div>
+
+</html>

@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+	<div th:fragment="menu">
+		<!-- this is header -->
+
+		<div class="sidebar" data-color="purple"
+			data-image="assets/img/sidebar-5.jpg">
+
+			<div class="sidebar-wrapper">
+				<div class="logo">						
+					 <a th:href="@{/}"><img th:src="@{/images/easymprest1.png}" class="img-responsive center-block" width="200" alt="Logo" /></a>
+					<span class="simple-text">
+						Emprestimo facil </span>					 
+				</div>
+
+				<ul class="nav">
+					<li class="active"><a th:href="@{/registration}" sec:authorize="hasAuthority('ADMIN')"> 
+						<i class="pe-7s-user"></i>
+						<p>REGISTRAR USUARIO</p></a>
+					</li>	
+					
+					<li class="active"><a th:href="@{/emprestimos}" sec:authorize="hasAnyAuthority('ADMIN','USER')"> 
+						<i class="pe-7s-cart"></i>
+						<p>EMPRESTIMO</p></a>
+					</li>	
+					
+					<li class="active"><a th:href="@{/investimentos}" sec:authorize="hasAnyAuthority('ADMIN','USER')"> 
+						<i class="pe-7s-speaker"></i>
+						<p>INVESTIMENTO</p></a>
+					</li>
+					
+					<li class="active"><a th:href="@{/emprestimosRede}" sec:authorize="hasAnyAuthority('ADMIN','USER')"> 
+						<i class="pe-7s-global"></i>
+						<p>EMPRESTIMO EM REDE</p></a>
+					</li>
+					
+					<li class="active"><a th:href="@{/minhasOperacoes}" sec:authorize="hasAnyAuthority('ADMIN','USER')"> 
+						<i class="pe-7s-global"></i>
+						<p>MINHAS OPERACOES</p></a>
+					</li>	
+															
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

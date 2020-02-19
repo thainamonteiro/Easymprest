@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+<title>Easymprest</title>
+
+<div th:replace="fragments/header :: header-css"></div>
+
+</head>
+<body>
+
+	<div class="wrapper">
+
+		<div th:replace="fragments/menu :: menu"></div>
+
+		<div class="main-panel">
+
+			<div th:replace="fragments/sitenavbar :: sitenavbar"></div>
+
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Registro de Investimentos</h4>
+								</div>
+
+								<div class="content">
+									<form autocomplete="off" action="#"
+										th:action="@{/emprestimosRede}" th:object="${operacao}"
+										method="post" class="form-horizontal" role="form"
+										name="formularioEmprestimosRede">
+
+										<div class="col-lg-9">
+
+											<div class="form-group">
+												<div class="col-sm-3">
+													<label
+														th:if="${#fields.hasErrors('financiamentoDireto.valorTotalSolicitado')}"
+														th:errors="*{financiamentoDireto.valorTotalSolicitado}"
+														class="validation-message"></label> <input id="valorInvestimento" type="text"
+														th:field="*{financiamentoDireto.valorTotalSolicitado}"
+														placeholder="Valor necessário" class="form-control"
+														data-mask="R$ ###0.00" data-mask-reverse="true"/>
+												</div>
+												<div class="col-sm-9">
+													<label th:if="${#fields.hasErrors('financiamentoDireto.motivo')}"
+														th:errors="*{financiamentoDireto.motivo}"
+														class="validation-message"></label> <input type="text"
+														th:field="*{financiamentoDireto.motivo}" placeholder="Descrição"
+														class="form-control" />
+												</div>
+											</div>
+										</div>
+
+
+										<div class="col-lg-9">
+										
+											<div class="form-group">
+												<div class="col-sm-9">
+													<label th:if="${#fields.hasErrors('amigo1')}"	th:errors="*{amigo1}" class="validation-message"></label> 
+													<input type="text" th:field="*{amigo1}" placeholder="Email do primeiro amigo" class="form-control" />
+												</div>
+																								<div class="col-sm-9">
+													<label th:if="${#fields.hasErrors('amigo2')}"	th:errors="*{amigo2}" class="validation-message"></label> 
+													<input type="text" th:field="*{amigo2}" placeholder="Email do segundo amigo" class="form-control" />
+												</div>
+																								<div class="col-sm-9">
+													<label th:if="${#fields.hasErrors('amigo3')}"	th:errors="*{amigo3}" class="validation-message"></label> 
+													<input type="text" th:field="*{amigo3}" placeholder="Email do terceiro amigo" class="form-control" />
+												</div>
+																								<div class="col-sm-9">
+													<label th:if="${#fields.hasErrors('amigo4')}"	th:errors="*{amigo4}" class="validation-message"></label> 
+													<input type="text" th:field="*{amigo4}" placeholder="Email do quarto amigo" class="form-control" />
+												</div>
+																								<div class="col-sm-9">
+													<label th:if="${#fields.hasErrors('amigo5')}"	th:errors="*{amigo5}" class="validation-message"></label> 
+													<input type="text" th:field="*{amigo5}" placeholder="Email do quinto amigo" class="form-control" />
+												</div>
+											</div>
+
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-9">
+												<button type="submit" class="btn btn-primary btn-block">Solicitar empréstimo a sua rede de amigos</button>
+											</div>
+										</div>
+
+										<span th:utext="${successMessage}"></span>
+
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div th:replace="fragments/footer :: footer"></div>
+
+		</div>
+	</div>
+
+
+</body>
+
+<div th:replace="fragments/scriptsfimpage :: scriptsfimpage"></div>
+
+</html>

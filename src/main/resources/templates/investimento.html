@@ -1,0 +1,115 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+<title>Easymprest</title>
+
+<div th:replace="fragments/header :: header-css"></div>
+
+</head>
+<body>
+	
+	<div th:replace="fragments/loading :: loading"></div>
+	
+	<div class="wrapper">
+
+		<div th:replace="fragments/menu :: menu"></div>
+
+		<div class="main-panel">
+
+			<div th:replace="fragments/sitenavbar :: sitenavbar"></div>
+
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Registro de Investimentos</h4>
+								</div>
+
+								<div class="content">
+									<form autocomplete="off" action="#"
+										th:action="@{/investimentos}" th:object="${operacao}"
+										method="post" class="form-horizontal" role="form"
+										name="formularioInvestimentos">
+
+										<div class="col-lg-9">
+
+											<div class="form-group">
+												<div class="col-sm-3">
+													<span valor-invalido="O valor do investimento não pode ultrapassar R$ 200,00" hidden class="texto-valor-invalido"></span>
+													<label
+														th:if="${#fields.hasErrors('investimento.valorInvestido')}"
+														th:errors="*{investimento.valorInvestido}"
+														class="validation-message"></label> 
+													<input id="valorInvestimento" type="text"
+														th:field="*{investimento.valorInvestido}"
+														placeholder="Valor Investimento" class="form-control"
+														data-mask="R$ ###0.00" data-mask-reverse="true"/>
+												</div>
+												<div class="col-sm-9">
+													<label th:if="${#fields.hasErrors('investimento.motivo')}"
+														th:errors="*{investimento.motivo}"
+														class="validation-message"></label> <input type="text"
+														th:field="*{investimento.motivo}" placeholder="Descrição"
+														class="form-control" />
+												</div>
+											</div>
+										</div>
+
+
+										<div class="col-lg-9">
+
+											<div class="form-group">
+												<div class="col-sm-6">
+													<!-- 														<label th:if="${#fields.hasErrors('operacao.investimento.valorInvestido')}"	th:errors="*{operacao.investimento.valorInvestido}" class="validation-message"></label>  -->
+													<!-- 														<input type="number" th:field="*{operacao.investimento.valorInvestido}" placeholder="Numero Cartão" class="form-control" /> -->
+													<input type="number" placeholder="Numero Cartão"
+														class="form-control" />
+												</div>
+												<div class="col-sm-1">
+													<!-- 														<label th:if="${#fields.hasErrors('operacao.investimento.valorInvestido')}"	th:errors="*{operacao.investimento.valorInvestido}" class="validation-message"></label>  -->
+													<!-- 														<input type="number" th:field="*{operacao.investimento.valorInvestido}" placeholder="CVC" class="form-control" /> -->
+													<input type="number" placeholder="CVC" class="form-control" />
+												</div>
+											</div>
+
+										</div>
+
+
+										<div class="form-group">
+											<div class="col-sm-9">
+												<button type="submit" class="btn btn-primary btn-block">Registrar
+													Investimento</button>
+											</div>
+										</div>
+
+										<span th:utext="${successMessage}"></span>
+
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div th:replace="fragments/footer :: footer"></div>
+
+		</div>
+	</div>
+
+
+</body>
+
+<div th:replace="fragments/scriptsfimpage :: scriptsfimpage"></div>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+<title>Easymprest</title>
+
+<div th:replace="fragments/header :: header-css"></div>	
+
+<style type="text/css">
+
+.back-image {
+
+background-image: url(assets/img/investimentos.png);
+background-size: cover;
+
+}
+
+.sub-title{
+
+color: white;
+
+}
+
+</style>
+
+</head>
+<body>
+
+	<div class="wrapper back-image">
+			
+
+		<div class="main-panel" style="width: 100%">
+		
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+
+						<div class="col-md-6 col-md-offset-3">
+							<br> <br>
+							<img th:src="@{/images/easymprest.png}" class="img-responsive center-block" width="200" alt="Logo" />
+							<form th:action="@{/login}" method="POST" class="form-signin">
+								<h3 class="form-signin-heading sub-title" > Bem vindo ao Easymprest</h3>
+								<br/>
+								 
+								<input type="text" id="email" name="email"  th:placeholder="Email"
+									class="form-control" /> <br/> 
+								<input type="password"  th:placeholder="Password"
+									id="password" name="password" class="form-control" /> <br /> 
+									
+								<div align="center" th:if="${param.error}">
+									<p style="font-size: 20; color: #FF1C19;">Email e senha invalido.</p>
+								</div>
+								<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+							</form>
+							
+							<span class="sub-title" style="margin-top: 12px; display: block;">Não é registrado?
+								<a th:href="@{/cadastro}"> Cadastre-se</a>
+							</span>
+			
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		
+
+		</div>
+	</div>
+
+
+</body>
+
+<div th:replace="fragments/scriptsfimpage :: scriptsfimpage"></div>	
+
+</html>
